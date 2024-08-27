@@ -1008,7 +1008,7 @@ The attacker's actual profit was $419.916 ($0.69986 \times 600$), not the $821,3
 ### When Doing Sandwich Using 48 Club
 
 
-The attack recorded in [Transaction](https://eigenphi.io/mev/bsc/tx/0x8231ec4d8105694d404ec64ce7f08807c86f7a8dcb4e90dbbeee50ee8ae98110) is a sandwich attack. The profit, after subtracting the cost from the revenue of this transaction, amounts to $22.455143.
+The attack recorded in [transaction](https://eigenphi.io/mev/bsc/tx/0x8231ec4d8105694d404ec64ce7f08807c86f7a8dcb4e90dbbeee50ee8ae98110) is a sandwich attack. The profit, after subtracting the cost from the revenue of this transaction, amounts to $22.455143.
 
 
 ![](images/eigenphi_5.png)
