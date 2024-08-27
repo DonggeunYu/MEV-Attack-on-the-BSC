@@ -1,0 +1,20 @@
+codecov:
+  status:
+    project:
+      default:
+        target: 85%
+        threshold: 1%
+        base: auto
+        branches:
+          - "!main"
+        flags:
+          - unit
+        paths:
+          - "src"
+        if_ci_failed: error #success, failure, error, ignore
+        informational: false
+        only_pulls: false
+  bot: codecov-io
+  strict_yaml_branch: default
+  max_report_age: off
+  require_ci_to_pass: true

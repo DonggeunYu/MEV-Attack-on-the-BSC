@@ -1,0 +1,57 @@
+name: Contract Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  files-changed:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Determine Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            files:
+              - .github/workflows/contract.lint.yaml
+              - contract/**
+
+  lint:
+    needs: files-changed
+    if: ${{ needs.files-changed.outputs.files == 'true' }}
+    name: Contract Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 19.x
+          cache: 'npm'
+          cache-dependency-path: contract/package-lock.json
+      - name: Install dependencies
+        working-directory: contract
+        run: npm install
+      - name: Run linter (Solidity)
+        working-directory: contract
+        run: npm run sol:lint
+      - name: Run linter (TypeScript)
+        working-directory: contract
+        run: npm run tsx:lint

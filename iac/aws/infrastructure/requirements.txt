@@ -1,0 +1,3 @@
+pulumi
+pulumi-aws
+pulumi-aws-native

@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace  # auto-fix trailing whitespaces
+      - id: end-of-file-fixer  # add EOF "\n" if missing
+      - id: no-commit-to-branch  # forbid direct commits to master
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.14
+    hooks:
+      - id: ruff
+        args:
+          - --quiet
+          - --fix
+          - --line-length=100
+      - id: ruff-format

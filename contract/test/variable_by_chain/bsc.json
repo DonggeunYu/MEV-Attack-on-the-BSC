@@ -1,0 +1,251 @@
+{
+  "WRAPPED_NATIVE_TOKEN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+  "UNISWAP_V2_SWAP": {
+    "UNISWAP_V2": {
+      "ROUTER_ADDRESS": "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24",
+      "POOL_ADDRESS": "0x8a1Ed8e124fdFBD534bF48baF732E26db9Cc0Cf4",
+      "TOKEN_IN_ADDRESS": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059ff775485246999027b3197955"
+    },
+    "SUSHISWAP_V2": {
+      "ROUTER_ADDRESS": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+      "POOL_ADDRESS": "0x2905817b020fd35d9d09672946362b62766f0d69",
+      "TOKEN_IN_ADDRESS": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059ff775485246999027b3197955"
+    },
+    "PANCAKESWAP_V2": {
+      "ROUTER_ADDRESS": "0x10ed43c718714eb63d5aa57b78b54704e256024e",
+      "POOL_ADDRESS": "0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "THENA": {
+      "POOL_ADDRESS": "0x6be6a437a1172e6c220246ecb3a92a45af9f0cbc",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "BISWAP_V2": {
+      "ROUTER_ADDRESS": "0x3a6d8ca21d1cf76f653a67577fa0d27453350dd8",
+      "POOL_ADDRESS": "0x8840c6252e2e86e545defb6da98b2a0e26d8c1ba",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "APESWAP": {
+      "ROUTER_ADDRESS": "0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7",
+      "POOL_ADDRESS": "0x83c5b5b309ee8e232fe9db217d394e262a71bcc0",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "MDEX": {
+      "ROUTER_ADDRESS": "0x7dae51bd3e3376b8c7c4900e9107f12be3af1ba8",
+      "POOL_ADDRESS": "0x09cb618bf5ef305fadfd2c8fc0c26eecf8c6d5fd",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "BABYSWAP": {
+      "ROUTER_ADDRESS": "0x8317c460c22a9958c27b4b6403b98d2ef4e2ad32",
+      "POOL_ADDRESS": "0x04580ce6dee076354e96fed53cb839de9efb5f3f",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "NOMISWAP": {
+      "ROUTER_ADDRESS": "0xd654953d746f0b114d1f85332dc43446ac79413d",
+      "POOL_ADDRESS": "0xe2bbf54dc0ccdd0cf6270f2af2f62ff79903bb27",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "WAULTSWAP": {
+      "ROUTER_ADDRESS": "0xd48745e39bbed146eec15b79cbf964884f9877c2",
+      "POOL_ADDRESS": "0xd6196036cB72BB921E013189CC594feC29453C2E",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "GIBXSWAP": {
+      "ROUTER_ADDRESS": "0x253fE2C76728C98FC18Bb52e9A0bA8522be15aa5",
+      "POOL_ADDRESS": "0x3dafe6213fbdE2f74e7D5Be443d5d2AA258d74C7",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    }
+  },
+  "UNISWAP_V3_SWAP": {
+    "UNISWAP_V3": {
+      "ROUTER_ADDRESS": "0xB971eF87ede563556b2ED4b1C0b0019111Dd85d2",
+      "POOL_ADDRESS": "0x47a90a2d92a8367a91efa1906bfc8c1e05bf10c4",
+      "TOKEN_IN_ADDRESS": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "PANCAKESWAP_V3": {
+      "ROUTER_ADDRESS": "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4",
+      "POOL_ADDRESS": "0x172fcd41e0913e95784454622d1c3724f546f849",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    },
+    "THENA_FUSION": {
+      "POOL_ADDRESS": "0xD405b976Ac01023c9064024880999fC450A8668b",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    }
+  },
+  "BAKERY_SWAP": {
+    "BAKERYSWAP": {
+      "ROUTER_ADDRESS": "0xcde540d7eafe93ac5fe6233bee57e1270d3e330f",
+      "POOL_ADDRESS": "0x9ec271c041a18aa7bef070a1f196eea1d06ab7cb",
+      "TOKEN_IN_ADDRESS": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "TOKEN_OUT_ADDRESS": "0x55d398326f99059fF775485246999027B3197955"
+    }
+  },
+  "MultiHop": {
+    "UniswapV2UniswapV2": {
+      "TEST_CASE": [
+        [
+          "UNISWAP_V2",
+          "SUSHISWAP_V2"
+        ],
+        [
+          "SUSHISWAP_V2",
+          "PANCAKESWAP_V2"
+        ],
+        [
+          "PANCAKESWAP_V2",
+          "BISWAP_V2"
+        ],
+        [
+          "BISWAP_V2",
+          "APESWAP"
+        ],
+        [
+          "APESWAP",
+          "MDEX"
+        ],
+        [
+          "MDEX",
+          "BABYSWAP"
+        ],
+        [
+          "BABYSWAP",
+          "NOMISWAP"
+        ],
+        [
+          "NOMISWAP",
+          "WAULTSWAP"
+        ],
+        [
+          "WAULTSWAP",
+          "GIBXSWAP"
+          ],
+        [
+          "GIBXSWAP",
+          "UNISWAP_V2"
+          ]
+      ]
+    },
+    "UniswapV2UniswapV3": {
+      "TEST_CASE": [
+        [
+          "SUSHISWAP_V2",
+          "UNISWAP_V3"
+        ],
+        [
+          "PANCAKESWAP_V2",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "BISWAP_V2",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "APESWAP",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "MDEX",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "BABYSWAP",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "NOMISWAP",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "WAULTSWAP",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "GIBXSWAP",
+          "PANCAKESWAP_V3"
+        ]
+      ]
+    },
+    "UniswapV3UniswapV2": {
+      "TEST_CASE": [
+        [
+          "UNISWAP_V3",
+          "SUSHISWAP_V2"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "PANCAKESWAP_V2"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "BISWAP_V2"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "APESWAP"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "MDEX"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "BABYSWAP"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "NOMISWAP"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "WAULTSWAP"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "GIBXSWAP"
+        ]
+      ]
+    },
+    "UniswapV3UniswapV3": {
+      "TEST_CASE": [
+        [
+          "UNISWAP_V3",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "PANCAKESWAP_V3",
+          "UNISWAP_V3"
+        ]
+      ]
+    },
+    "UniswapV2UniswapV3UniswapV2UniswapV3": {
+      "TEST_CASE": [
+        [
+          "PANCAKESWAP_V2",
+          "UNISWAP_V3",
+          "MDEX",
+          "PANCAKESWAP_V3"
+        ],
+        [
+          "BABYSWAP",
+          "UNISWAP_V3",
+          "APESWAP",
+          "PANCAKESWAP_V3"
+        ]
+      ]
+    }
+  }
+}

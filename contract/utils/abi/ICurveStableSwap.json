@@ -1,0 +1,68 @@
+{
+  "abi": [
+    {
+      "name": "TokenExchange",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "buyer",
+          "indexed": true
+        },
+        {
+          "type": "int128",
+          "name": "sold_id",
+          "indexed": false
+        },
+        {
+          "type": "uint256",
+          "name": "tokens_sold",
+          "indexed": false
+        },
+        {
+          "type": "int128",
+          "name": "bought_id",
+          "indexed": false
+        },
+        {
+          "type": "uint256",
+          "name": "tokens_bought",
+          "indexed": false
+        }
+      ],
+      "anonymous": false,
+      "type": "event"
+    },
+    {
+      "name": "TokenExchangeUnderlying",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "buyer",
+          "indexed": true
+        },
+        {
+          "type": "int128",
+          "name": "sold_id",
+          "indexed": false
+        },
+        {
+          "type": "uint256",
+          "name": "tokens_sold",
+          "indexed": false
+        },
+        {
+          "type": "int128",
+          "name": "bought_id",
+          "indexed": false
+        },
+        {
+          "type": "uint256",
+          "name": "tokens_bought",
+          "indexed": false
+        }
+      ],
+      "anonymous": false,
+      "type": "event"
+    }
+  ]
+}

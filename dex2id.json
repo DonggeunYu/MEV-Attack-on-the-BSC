@@ -1,0 +1,66 @@
+{
+  "UNISWAP_V2": {
+    "name": "UniswapV2",
+    "id": 0
+  },
+  "SUSHISWAP_V2": {
+    "name": "SushiswapV2",
+    "id": 1
+  },
+  "PANCAKESWAP_V2": {
+    "name": "PancakeSwapV2",
+    "id": 2
+  },
+  "THENA": {
+    "name": "Thena",
+    "id": 3
+  },
+  "BISWAP_V2": {
+    "name": "BiswapV2",
+    "id": 4
+  },
+  "APESWAP": {
+    "name": "ApeSwap",
+    "id": 5
+  },
+  "MDEX": {
+    "name": "MDEX",
+    "id": 6
+  },
+  "BABYSWAP": {
+    "name": "BabySwap",
+    "id": 7
+  },
+  "NOMISWAP": {
+    "name": "Nomiswap",
+    "id": 8
+  },
+    "WAULTSWAP": {
+    "name": "WaultSwap",
+    "id": 9
+  },
+  "GIBXSWAP": {
+    "name": "GIBXSwap",
+    "id": 10
+  },
+  "UNISWAP_V3": {
+    "name": "UniswapV3",
+    "id": 11
+  },
+  "SUSHISWAP_V3": {
+    "name": "SushiswapV3",
+    "id": 12
+  },
+  "PANCAKESWAP_V3": {
+    "name": "PancakeSwapV3",
+    "id": 13
+  },
+  "THENA_FUSION": {
+    "name": "Thena Fusion",
+    "id": 14
+  },
+  "BAKERYSWAP": {
+    "name": "BakerySwap",
+    "id": 15
+  }
+}

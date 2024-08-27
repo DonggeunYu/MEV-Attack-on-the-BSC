@@ -1,0 +1,24 @@
+{
+  "DEX_BY_AMM": {
+    "UNISWAP_V2_AMM": [
+      "UNISWAP_V2",
+      "SUSHISWAP_V2",
+      "PANCAKESWAP_V2",
+      "THENA",
+      "BISWAP_V2",
+      "APESWAP",
+      "MDEX",
+      "BABYSWAP",
+      "NOMISWAP",
+      "WAULTSWAP",
+      "BAKERYSWAP",
+      "GIBXSWAP"
+    ],
+    "UNISWAP_V3_AMM": [
+      "UNISWAP_V3",
+      "SUSHISWAP_V3",
+      "PANCAKESWAP_V3",
+      "THENA_FUSION"
+    ]
+  }
+}

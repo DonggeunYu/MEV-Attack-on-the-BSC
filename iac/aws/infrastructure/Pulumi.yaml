@@ -1,0 +1,8 @@
+name: makima
+runtime:
+  name: python
+description: A minimal AWS Python Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: ""

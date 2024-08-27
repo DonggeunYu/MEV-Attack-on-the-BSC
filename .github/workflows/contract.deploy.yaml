@@ -1,0 +1,104 @@
+name: Contract Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+    tags:
+      - '**'
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    tags:
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract-files-changed:
+    name: Determine Contract Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all history so that tags are available for determining the latest tag
+
+      - name: Get latest tag
+        id: latest-tag
+        run: |
+          echo "BASE_TAG=$(git tag --sort=committerdate | tail -2 | head -1)" >> $GITHUB_ENV
+          echo $BASE_TAG
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          base: ${{ (github.event_name == 'push' && contains(github.ref, 'refs/tags/')) && env.BASE_TAG || github.ref_name }}
+          filters: |
+            files:
+              - .github/workflows/contract.deploy.yaml
+              - contract/**
+
+  contract-deploy:
+    needs: contract-files-changed
+    if: ${{ (github.event_name == 'pull_request' && needs.contract-files-changed.outputs.files == 'true') || needs.contract-files-changed.outputs.files == 'true' }}
+    name: Contract Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 19.x
+          cache: 'npm'
+          cache-dependency-path: contract/package-lock.json
+
+      - name: Install dependencies
+        working-directory: contract
+        run: npm install
+
+      - name: Run Hardhat Node for Test
+        if: ${{ github.event_name == 'pull_request' }}
+        working-directory: contract
+        run: |
+          npx hardhat --config hardhat_ethereum.ts node &
+          while ! nc -z localhost 8545; do sleep 1; done
+
+      - name: Run Deploy Test (Ethereum)
+        if: ${{ github.event_name == 'pull_request' }}
+        working-directory: contract
+        run: |
+          npx hardhat --config hardhat_ethereum.ts --network localhost run scripts/deploy.ts
+
+      - name: Run Deploy (Ethereum)
+        if: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
+        working-directory: contract
+        run: npx hardhat --config hardhat_ethereum.ts --network mainnet run scripts/deploy.ts
+
+      - name: Check Deployed Contract (Ethereum)
+        id: check_deployed_contract
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "/tmp/arbitrage_deployed_address.txt"
+
+      - name: Check Deployed Contract (Ethereum)
+        if: ${{ steps.check_deployed_contract.outputs.exists == 'true' }}
+        run: |
+          cat /tmp/arbitrage_deployed_address.txt
+          echo "Deployed Contract Address: ${{ steps.check_deployed_contract.outputs.exists }}"
+
+      - name: Archive Deployed Contract (Ethereum)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: arbitrage-deployed-address
+          path: /tmp/arbitrage_deployed_address.txt
+          retention-days: 365

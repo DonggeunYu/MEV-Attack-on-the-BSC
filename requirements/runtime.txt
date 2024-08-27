@@ -1,0 +1,10 @@
+nest-asyncio==1.5.8
+web3==6.15.1
+eth-retry==0.1.19
+requests==2.29.0
+tqdm==4.65.0
+loguru==0.7.2
+beautifulsoup4==4.12.3
+maturin==1.5.1
+aioprocessing==2.0.1
+evm-trace==0.1.2

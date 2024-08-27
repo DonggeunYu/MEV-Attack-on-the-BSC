@@ -1,0 +1,17 @@
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+
+# Hardhat expose
+/contracts-exposed
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json

@@ -1,0 +1,88 @@
+name: IAC Preview
+
+permissions: write-all
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  files-changed:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Determine Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            files:
+              - .github/workflows/iac.preview.yaml
+              - iac/**
+
+  preview:
+    needs: files-changed
+    if : ${{ needs.files-changed.outputs.files == 'true' }}
+    name: IAC Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+          cache: 'pip'
+          cache-dependency-path: iac/requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+        working-directory: ./iac
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/170633695862/locations/global/workloadIdentityPools/github-action/providers/github-action
+          service_account: github-action@makima-dev.iam.gserviceaccount.com
+      - name: Refresh Service
+        uses: pulumi/actions@v5
+        with:
+          work-dir: ./iac/service
+          command: refresh
+          stack-name: DonggeunYu/makima/dev.service
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      - name: Preview Service
+        uses: pulumi/actions@v5
+        with:
+          work-dir: ./iac/service
+          command: preview
+          stack-name: DonggeunYu/makima/dev.service
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      - name: Refresh Infrastructure
+        uses: pulumi/actions@v5
+        with:
+          work-dir: ./iac/infrastructure
+          command: refresh
+          stack-name: DonggeunYu/makima/dev.infrastructure
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      - name: Preview Infrastructure
+        uses: pulumi/actions@v5
+        with:
+          work-dir: ./iac/infrastructure
+          command: preview
+          stack-name: DonggeunYu/makima/dev.infrastructure
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

@@ -1,0 +1,3 @@
+// .eslintignore
+node_modules
+dist

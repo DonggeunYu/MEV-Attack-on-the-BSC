@@ -1,0 +1,136 @@
+name: Source Deploy
+
+permissions: write-all
+
+on:
+  push:
+    tags:
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-files-changed:
+    name: Determine Source Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0 # Fetch all history so that tags are available for determining the latest tag
+
+      - name: Get latest tag
+        id: latest-tag
+        run: |
+          echo "BASE_TAG=$(git tag --sort=committerdate | tail -2 | head -1)" >> $GITHUB_ENV
+          echo $BASE_TAG
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          base: ${{ (github.event_name == 'push' && contains(github.ref, 'refs/tags/')) && env.BASE_TAG || github.ref_name }}
+          filters: |
+            files:
+              - .github/workflows/src.deploy.yaml
+              - main.py
+              - src/**
+              - config/ethereum_config.py
+
+  contract-files-changed:
+    needs: source-files-changed
+    name: Determine Contract Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Get latest tag
+        id: latest-tag
+        run: |
+          echo "BASE_TAG=$(git tag --sort=committerdate | tail -2 | head -1)" >> $GITHUB_ENV
+          echo $BASE_TAG
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          base: ${{ (github.event_name == 'push' && contains(github.ref, 'refs/tags/')) && env.BASE_TAG || github.ref_name }}
+          filters: |
+            files:
+              - .github/workflows/contract.deploy.yaml
+              - contract/**
+
+  deploy:
+    needs: contract-files-changed
+    if: ${{ needs.source-files-changed.outputs.files == 'true' }}
+    name: Source Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Contract Deploy
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Contract Deploy'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 1
+          allowed-conclusions: success,skipped,cancelled
+
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - name: Download Deployed Contract (Ethereum)
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: contract.deploy.yaml
+          search_artifacts: true
+          name: arbitrage-deployed-address
+          path: /tmp
+
+      - name: Echo Deployed Contract (Ethereum)
+        run: cat /tmp/arbitrage_deployed_address.txt
+
+      - name: Authenticate with Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: projects/170633695862/locations/global/workloadIdentityPools/github-action/providers/github-action
+          service_account: github-action@makima-dev.iam.gserviceaccount.com
+
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v1
+        with:
+          registry: asia-northeast3-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Build Docker image
+        run: |
+          echo 'python3 main.py --min-nhops=2 --max-nhops=3 --account-address="0x007fc398a4d8fEaBcDa8eD17dB92976a7E0Dba00" --account-private-key="0x703c4b799f2137ce78e902484f674010d3dca796641bdc1224fd4a85f50404fb" --contract-address="'$(cat /tmp/arbitrage_deployed_address.txt)'" --target-profit=0.0002' >> docker/source/run.sh
+          docker build -t asia-northeast3-docker.pkg.dev/makima-dev/docker-registry/arbitrage:${{ github.sha }} . -f docker/source/Dockerfile
+
+      - name: Push Docker image
+        if: ${{ github.event_name == 'push' }}
+        run: docker push asia-northeast3-docker.pkg.dev/makima-dev/docker-registry/arbitrage:${{ github.sha }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+
+      - name: Deploy to Compute Engine
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          gcloud compute instances create-with-container arbitrage \
+            --container-image=asia-northeast3-docker.pkg.dev/makima-dev/docker-registry/arbitrage:${{ github.sha }} \
+            --network-interface=network=ethereum-node-network-e484fb1,subnet=ethereum-node-subnetwork-f446a35 \
+            --tags=ethereum-node --machine-type=e2-highcpu-4 --zone=asia-northeast3-a

@@ -1,0 +1,7 @@
+config:
+  aws:region: us-east-1
+  aws-native:region: us-east-1
+  aws:accessKey: AKIAXHYI77SKZXYASWE4
+  aws:secretKey: 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
+  aws-native:accessKey: AKIAXHYI77SKZXYASWE4
+  aws-native:secretKey: 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

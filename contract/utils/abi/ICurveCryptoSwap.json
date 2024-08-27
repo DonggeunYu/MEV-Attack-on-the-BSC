@@ -1,0 +1,36 @@
+{
+  "abi": [
+    {
+      "name": "TokenExchange",
+      "inputs": [
+        {
+          "name": "buyer",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "sold_id",
+          "type": "uint256",
+          "indexed": false
+        },
+        {
+          "name": "tokens_sold",
+          "type": "uint256",
+          "indexed": false
+        },
+        {
+          "name": "bought_id",
+          "type": "uint256",
+          "indexed": false
+        },
+        {
+          "name": "tokens_bought",
+          "type": "uint256",
+          "indexed": false
+        }
+      ],
+      "anonymous": false,
+      "type": "event"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+config:
+  gcp:project: makima-dev
+  gcp:region: asia-northeast3
+  gcp:zone: asia-northeast3-a
+  makima:nodeMachineType: e2-standard-8

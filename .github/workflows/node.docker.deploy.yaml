@@ -1,0 +1,76 @@
+name: Node Docker Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+jobs:
+  files-changed:
+    name: Determine Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            files:
+              - .github/workflows/node.docker.deploy.yaml
+              - docker/node/**
+
+  docker-deploy:
+    needs: files-changed
+    if: ${{ needs.files-changed.outputs.files == 'true' }}
+    permissions: write-all
+
+    name: Node Docker Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Authenticate with Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: projects/170633695862/locations/global/workloadIdentityPools/github-action/providers/github-action
+          service_account: github-action@makima-dev.iam.gserviceaccount.com
+
+      - name: Login to Artifact Registry
+        uses: docker/login-action@v1
+        with:
+          registry: asia-northeast3-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Check BSC Node Files Changed
+        id: path-filter-bsc-node
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            files:
+              - .github/workflows/node.docker.deploy.yaml
+              - docker/node/bsc/**
+
+      - name: Build BSC Node Docker Image
+        id: build-bsc-node
+        if: ${{ steps.path-filter-bsc-node.outputs.files == 'true' }}
+        run: docker build -t asia-northeast3-docker.pkg.dev/makima-dev/docker-registry/node/bsc:${{ github.sha }} .
+        working-directory: ./docker/node/bsc
+      - name: Push BSC Node Docker Image
+        if: ${{ needs.build-bsc-node.outcome == 'success' && github.event_name == 'push' }}
+        run: docker push asia-northeast3-docker.pkg.dev/makima-dev/docker-registry/node/bsc:${{ github.sha }}

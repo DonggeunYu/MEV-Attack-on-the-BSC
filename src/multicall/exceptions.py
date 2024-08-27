@@ -1,0 +1,2 @@
+class StateOverrideNotSupported(Exception):
+    pass

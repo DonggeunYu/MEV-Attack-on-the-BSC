@@ -1,0 +1,70 @@
+name: Contract UnitTest
+
+on:
+  pull_request:
+    branches:
+      - main
+    tags:
+      - '**'
+    types:
+      - opened
+      - reopened
+      - synchronize
+  schedule:
+    - cron: '8 0 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  files-changed:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Determine Files Changed
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.path-filter.outputs.files }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Path Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            files:
+              - .github/workflows/contract.unittest.yaml
+              - contract/**
+
+  unittest:
+    needs: files-changed
+    if: ${{ needs.files-changed.outputs.files == 'true' || github.event_name == 'schedule' }}
+    name: Contract UnitTest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 19.x
+          cache: 'npm'
+          cache-dependency-path: contract/package-lock.json
+      - name: Install dependencies
+        working-directory: contract
+        run: npm install
+      - name: Run UnitTest (BSC)
+        working-directory: contract
+        run: npx hardhat --config hardhat_bsc.ts test
+      - name: Run UnitTest (Arbitrum)
+        working-directory: contract
+        run: npx hardhat --config hardhat_arbitrum.ts test
+#      - name: Run UnitTest (Ethereum)
+#        working-directory: contract
+#        run: npx hardhat --config hardhat_ethereum.ts test
+      - name: Run UnitTest (Optimism)
+        working-directory: contract
+        run: npx hardhat --config hardhat_optimism.ts test
+      - name: Run UnitTest (Polygon)
+        working-directory: contract
+        run: npx hardhat --config hardhat_polygon.ts test
