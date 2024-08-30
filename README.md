@@ -1070,3 +1070,17 @@ I can no longer operate due to insufficient funds. I determined that $100K to $1
   - About gasPrice
     - [Transactions with 0 gwei are back](https://github.com/bnb-chain/bsc/issues/1746)
     - [Transactions with 0 gwei are back²](https://github.com/bnb-chain/bsc/issues/2371)
+
+<br>
+<br>
+<br>
+
+## Star History
+
+<a href="https://star-history.com/#DonggeunYu/MEV-Attack-Bot-on-the-BSC&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date" />
+ </picture>
+</a>
