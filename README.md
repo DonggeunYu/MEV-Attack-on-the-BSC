@@ -8,7 +8,7 @@
 </h4>
 
 ## Overview
-- This repository is an implementation of how to profit from a Maximal Extractable Value (MEV) attack against a Decentralized Exchange (DEX) on the Binance Smart Chain (BSC) network.
+This repository implements how to profit from a Maximal Extractable Value (MEV) attack against a Decentralized Exchange (DEX) on the Binance Smart Chain (BSC) network.
 - Since MEV development is directly tied to monetary gain, it's not easy to find resources that are actually helpful. I hope this resource will inspire other developers and add real value to their projects.
 - The project was developed and operational from January 2024 to May 2024.
 - For technical questions and feedback, please use the Issues page in the repository, and for all other inquiries, please contact ddonggeunn@gmail.com.
@@ -163,12 +163,12 @@
 ### The Ideal Flow of the Expected Blockchain
 This section is theoretical in nature and contains only the core information needed to develop an MEV attack. For specific implementation details, please refer to the other sections.
 
-The theoretical expected block creation process on a blockchain is as follows:
+The theoretically expected block creation process on a blockchain is as follows:
 
 1. User Transaction Creation:
   - The user creates a transaction and signs it with the private key of their wallet.
 2. Transaction Submission:
-  - The signed transaction is sent to an Execution Layer (EL) node (e.g., Geth, Erigon) via RPC (Remote Procedure Call) or other communication protocols.
+  - The signed transaction is sent to an Execution Layer (EL) node (e.g., Geth, Erigon) via Remote Procedure Call (RPC) or other communication protocols.
 3. Transaction Validation and Pooling:
   - The EL node validates the transaction and adds it to its local transaction pool (also known as the mempool).
 4. Peer-to-Peer Synchronization:
@@ -176,9 +176,9 @@ The theoretical expected block creation process on a blockchain is as follows:
 5. Validator Selection:
   - The Beacon Chain randomly selects a Validator (A) for block production. This selection process involves randomness, with each Validator’s chance of being selected proportional to the amount of Staking ETH they have.
 6. Block Construction:
-  - Validator (A) retrieves transactions from the EL node and constructs a block. The block is constructed to maximize profit, by including transactions with higher fees. The EL and Consensus Layer (CL) are integrated to exchange necessary information. If a transaction submitted to the EL by a user does not reach the EL node of Validator (A), it might not be included in the block.
+  - Validator (A) retrieves transactions from the EL node and constructs a block. The block is constructed to maximize profit by including transactions with higher fees. The EL and Consensus Layer (CL) are integrated to exchange necessary information. If a transaction submitted to the EL by a user does not reach the EL node of Validator (A), it might not be included in the block.
 7. Attestation Collection:
-  - Validator (A) prepares the block and seeks attestations from other Validators (B). These attestations are confirmations that other Validators agree with the block proposed by Validator (A).
+  Validator (A) prepares the block and seeks attestations from other Validators (B). These attestations confirm that other Validators agree with the block proposed by Validator (A).
 8. Block Validation and Attestation Submission:
   - Validators (B) review the proposed block and validate its correctness. They then submit their attestations to support the block.
 9. Block Finalization:
@@ -188,7 +188,7 @@ The theoretical expected block creation process on a blockchain is as follows:
 <br>
 
 ### Vulnerabilities of DEX Swap
-On the blockchain, DEXs make it easier to exchange various tokens. However, users who use DEXs to exchange tokens are at risk of losing their assets. The key to this vulnerability lies in the order of transactions within a block, which can be manipulated to create a security hole.
+On the blockchain, DEXs make it easier to exchange various tokens. However, users who use DEXs to exchange tokens risk losing their assets. The key to this vulnerability lies in the order of transactions within a block, which can be manipulated to create a security hole.
 
 
 **Arbigrage Attack**
@@ -199,7 +199,7 @@ On the blockchain, DEXs make it easier to exchange various tokens. However, user
   2. You can detect the price change and submit a transaction in the next block that takes advantage of the price difference to make a profit.
 - However, to make a profit, you must always be ahead of others.
 - The optimization process
-  1. you can analyze transactions submitted by others in the Mempool, which is a collection of transactions that are not yet part of a block. You can calculate if the transaction calls the DEX and what the expected price change will be.
+  1. You can analyze transactions submitted by others in the Mempool, a collection of transactions that are not yet part of a block. You can calculate whether the transaction calls the DEX and what the expected price change will be.
   2. Once you analyze the transaction, you can calculate the maximum expected profit by taking advantage of the price change opportunity.
   3. The attacker's transaction must follow immediately after the victim's transaction in order to beat the competition from other attackers and make a profit.
 
@@ -212,7 +212,7 @@ On the blockchain, DEXs make it easier to exchange various tokens. However, user
 - Definition: A technique that manipulates the liquidity of a DEX pool by placing attack transactions in front of or behind the victim's transactions in order to profit from the victim's transactions.
 - Note: This technique is a more complex attack than arbitrage, and unlike arbitrage, it results in a monetary loss to the victim. Victims of a sandwich attack actually suffer a loss of assets.
 - The process
-  1. the attacker artificially increases the price by placing a front-running transaction before the victim's transaction. (The larger the price increase in this process, the more the attacker may lose money as well).
+  1. The attacker artificially increases the price by placing a front-running transaction before the victim's transaction. (The larger the price increase in this process, the more the attacker may also lose money.)
   2. The victim places a transaction at a higher price than the price expected before the transaction. At this point, the price increase is equal to the difference between the front-running volume and the victim's volume.
   3. The attacker places a back-running transaction directly after the victim's transaction. This allows the attacker to recover the losses incurred during the front-running process and make additional profits.
 
@@ -220,7 +220,7 @@ On the blockchain, DEXs make it easier to exchange various tokens. However, user
 <br>
 
 ### How to Protect from MEV Attacker
-MEV attacks have a serious adverse impact on the blockchain ecosystem, but the structural limitations of blockchain make it difficult to fundamentally solve this problem. Currently, there are only technologies that partially mitigate these issues.
+MEV attacks have a serious adverse impact on the blockchain ecosystem, but blockchain's structural limitations make it difficult to solve this problem fundamentally. Currently, there are only technologies that partially mitigate these issues.
 
 MEV attackers need to know the victim's transaction information to launch an attack, and this information is exposed to the attacker at the Mempool stage. Therefore, the following strategies can be used to protect the victim's transactions.
 
@@ -231,8 +231,8 @@ Steps
 2. The victim submits transactions to the private mempool instead of the public mempool.
 3. the attacker analyzes the victim's transactions in the public or private mempool to identify profit opportunities.
 4. The attacker bundles their front-running and back-running transactions with the victim's transactions and submits them to the private Orderflow.
-5. The process involves the attacker returning a portion of the profit gained from the victim (e.g., the attacker may submit MEV fees as gas fees, or pay fees to a specific contract address).
-6. validate the execution of the bundle and the appropriateness of the fees to be paid. If multiple bundles are submitted for the same victim's transaction, the bundle with the highest fee is selected.
+5. The process involves the attacker returning a portion of the profit gained from the victim (e.g., the attacker may submit MEV fees as gas fees or pay fees to a specific contract address).
+6. Validate the bundle's execution and the appropriateness of the fees to be paid. If multiple bundles are submitted for the same victim's transaction, the bundle with the highest fee is selected.
 7. The Block Proposer looks up transactions in the public mempool and private orderflow. It then organizes and proposes a block that will bring the highest benefit to the Validator.
 8. The selected Validator builds the block proposed by the Block Proposer.
 9. The victim receives a portion of the profit returned by the attacker in step 5.
@@ -261,7 +261,7 @@ PBS promotes decentralization of the Ethereum network, increasing the overall be
 <br>
 
 ## Detailed Explanation of Source Code and Formulas
-The cost of using node server and bloXroute was significant, and the need to see results quickly prevented us from giving enough thought or refactoring to the structure of the project. I apologize if the code is hard to read. 🙇
+The cost of using the node server and bloXroute was significant, and the need to see results quickly prevented us from giving enough thought or refactoring to the structure of the project. I apologize if the code is hard to read. 🙇
 ### Project Structure
 #### Directory Structure
 - **contract**: This is a Solidity project based on **Hardhat**.
@@ -274,7 +274,7 @@ The cost of using node server and bloXroute was significant, and the need to see
 
 - **iac**: Infrastructure as Code (IAC) written in **Pulumi** for running nodes.
   * **aws**: IAC in an AWS environment.
-    + **gcp**: IAC in an GCP environment (Deprecated in development).
+    + **gcp**: IAC in a GCP environment (Deprecated in development).
 
 - **pyrevm**: This is a Python wrapper of REVM, a Rust implementation of the **Ethereum Virtual Machine** (EVM). The original can be found at [paradigmxyz/pyrevm](https://github.com/paradigmxyz/pyrevm).
 
@@ -290,7 +290,7 @@ The cost of using node server and bloXroute was significant, and the need to see
 
 ### IAC Tips
 
-- For the region, i recommend New York, USA or Germany.
+- For the region, I recommend New York, the USA, or Germany.
   * By running your node as close as possible to other nodes that publicly receive transactions, you can quickly get your mempool shared in a limited amount of time.
 
 - Do not separate clients and nodes performing MEV attacks from load balancers, etc.
@@ -299,7 +299,7 @@ The cost of using node server and bloXroute was significant, and the need to see
 
 - It's important to utilize snapshots.
   * `geth` can be somewhat less reliable.
-  * I have had several experiences with chaindata corruption when geth crashes, so i recommend actively using the snapshot feature.
+  * I have had several experiences with chain data corruption when geth crashes, so I recommend actively using the snapshot feature.
 
 
 <br>
@@ -346,7 +346,7 @@ Let's assume that Pool A and Pool B exist.
 
 - **sandwichFrontRun**: The transactions are performed in the following order `My Contract -> A Pool -> My Contract -> B Pool -> My Contract`.
 
-- **sandwichFrontRunDifficult**: The transaction is performed in the following order `My Contract -> A Pool -> B Pool -> My Contract`. In this case, each pool needs to verify that it can send tokens to the next pool and that the next pool can receive tokens. This can reduce the amount of token transfers.
+- **sandwichFrontRunDifficult**: The transaction is performed in the following order: `My Contract -> A Pool -> B Pool -> My Contract`. In this case, each pool needs to verify that it can send tokens to the next pool and that the next pool can receive tokens, which can reduce the number of token transfers.
 
 
 
@@ -359,7 +359,7 @@ Let's assume that Pool A and Pool B exist.
 #### About the BackRun Function
 There are three functions
 
-- **sandwichBackRunWithBloxroute**: This function performs a BackRun, and then pays the fee via bloXroute.
+- **sandwichBackRunWithBloxroute**: This function performs a BackRun, and then the fee is paid via bloXroute.
 
 - **sandwichBackRun**: This function performs a BackRun. It is functionally equivalent to `sandwichBackRunWithBloxroute`, except that it does not involve paying a fee.
 
@@ -417,7 +417,7 @@ The test code is located in the following files:
    - In bloXroute, stream the address of the validator that will build the next block.
    - Run the `main` function with the MEV function as a multiprocess.
 
-2. Filters transactions received from the Mempool stream based on the presence of gas information and data. (If data is empty, the contract function is not called.)
+2. Filter transactions received from the Mempool stream are based on the presence of gas information and data. (If data is empty, the contract function is not called.)
 
 3. Trace the transaction using `debug_traceCall`:
    1. If an error occurs during the trace, remove the transaction.
@@ -578,7 +578,7 @@ The only remaining necessary information is the token address and token amount. 
   2. Transfer from pool to recipient
   3. Transfer from msg.sender to pool
 
-Depending on the order of the swap, it is difficult to extract the required values. Therefore, we detect the `transfer` and `transferFrom` function calls and extract the sender, recipient, and value from `call[“input”]`. Simply extracting the value is not enough, we need to validate that the token transfer is associated with a pool swap. To do this, we utilize a union with the `swap_events` variable.
+Depending on the order of the swap, extracting the required values can be difficult. Therefore, we detect the `transfer` and `transferFrom` function calls and extract the sender, recipient, and value from `call[“input”]`. Simply extracting the value is not enough; we need to validate that the token transfer is associated with a pool swap. To do this, we utilize a union with the `swap_events` variable.
 
 ~~~ python
     # transfer
@@ -632,7 +632,7 @@ In this part, we will analyze the AMMs on the DEX and implement an efficient for
 <br>
 
 #### Structure of Uniswap V2, V3
-While the overall structures of Uniswap V2 and V3 are similar, the main difference lies in their Automated Market Makers (AMMs).
+While Uniswap V2 and V3 have similar overall structures, their main difference is their Automated Market Makers (AMMs).
 
 Uniswap has three main contract addresses:
 
@@ -682,7 +682,7 @@ function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) internal p
 [function getAmountOut](https://github.com/Uniswap/v2-periphery/blob/master/contracts/libraries/UniswapV2Library.sol#L43-L50)
 
 
-Many MEV open source projects use the formula above, but the swap formula can be optimized to even more extremes.
+Many MEV open-source projects use the formula above, but the swap formula can be optimized to even greater extremes.
 
 The main goal is to optimize the formula so that there are no errors during the swap transaction and the maximum number of tokens are received. To do this, we need to analyze how we can validate that the proper tokens are coming in and going out when performing a swap transaction on a DEX contract.
 
@@ -802,12 +802,12 @@ Validate optimized formulas.
 - $R_{in}$ = 12124290984572619906122
 - $R_{out}$ = 7262381719977943429386502
 
-When use the official formula
+When using the official formula
 
 - $x$ = 10000000000000000000 (10 WBNB)
 - $y$ = 5967066790489861652480 (5967.06 DAI)
 
-When use the formula optimized to the extreme
+When using the formula optimized to the extreme
 
 - $x$ = 10000000000000000000 (10 WBNB)
 - $y$ = 5970056841417710950357 (5970.05 DAI)
@@ -962,7 +962,7 @@ def get_multi_hop_optimal_amount_in(data: List[Tuple[int, int, int, int]]):
 <br>
 
 ## EigenPhi is Overhyped
-### When Sandwich is Recognized as Arbitrage
+### When Sandwich is Recognized as an Arbitrage
 [EigenPhi](https://eigenphi.io) is a web service that allows you to track and analyze MEV attacks. The main page shows the profit per address. For example, it says that one address made a profit of \$30,803,554.37 in one week. Is this true?
 
 
@@ -1040,10 +1040,10 @@ This may raise a question: why did we separate the transaction that pays the fee
 
 ## Frequently Asked Questions
 
-#### Why you select the BSC network?
+#### Why did you select the BSC network?
 The fees on the Ethereum network can be excessively high, which prompted my choice of the BSC network, where gas is fixed at 1 Gwei.
 
-To further optimize transaction costs, you can utilize the Soul Point feature of the 48 Club to perform transactions at 0 Gwei.
+To further optimize transaction costs, you can use the 48 Club's Soul Point feature to perform transactions at 0 Gwei.
 
 #### Do you plan to continue developing arbitrage or MEV in the future?
 I can no longer operate due to insufficient funds. I determined that $100K to $1M worth of tokens were necessary to make a net profit from sandwich attacks.
