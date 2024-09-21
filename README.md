@@ -1,9 +1,9 @@
-# MEV Attack Bot on the BSC
+# MEV Attack on the BSC
 
 <h4 align="center">
     <p>
         <b>English</b> |
-                <a href="https://github.com/DonggeunYu/MEV-Attack-Bot-on-the-BSC/blob/main/README_ko.md">한국어</a>
+                <a href="https://github.com/DonggeunYu/MEV-Attack-on-the-BSC/blob/main/README_ko.md">한국어</a>
     </p>
 </h4>
 
@@ -1077,10 +1077,10 @@ I can no longer operate due to insufficient funds. I determined that $100K to $1
 
 ## Star History
 
-<a href="https://star-history.com/#DonggeunYu/MEV-Attack-Bot-on-the-BSC&Date">
+<a href="https://star-history.com/#DonggeunYu/MEV-Attack-on-the-BSC&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-Bot-on-the-BSC&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date" />
  </picture>
 </a>
