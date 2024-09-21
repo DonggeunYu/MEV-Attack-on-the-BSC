@@ -1,8 +1,8 @@
-# MEV Attack Bot on the BSC
+# MEV Attack on the BSC
 
 <h4 align="center">
     <p>
-                <a href="https://github.com/DonggeunYu/MEV-Attack-Bot-on-the-BSC/blob/main/README.md">English</a> |
+                <a href="https://github.com/DonggeunYu/MEV-Attack-on-the-BSC/blob/main/README.md">English</a> |
                 <b>한국어</b>
     </p>
 </h4>
@@ -1072,3 +1072,13 @@ I can no longer operate it due to insufficient funds. The reason is that I estim
   - About gasPrice
     - [Transactions with 0 gwei are back](https://github.com/bnb-chain/bsc/issues/1746)
     - [Transactions with 0 gwei are back²](https://github.com/bnb-chain/bsc/issues/2371)
+
+## Star History
+
+<a href="https://star-history.com/#DonggeunYu/MEV-Attack-on-the-BSC&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DonggeunYu/MEV-Attack-on-the-BSC&type=Date" />
+ </picture>
+</a>
