@@ -827,14 +827,14 @@ In this case, find a formula to calculate the value of $x$ for maximum profit.
 Variable definitions
 
 - $x$ = amount in
-- $y_1$ = amount out of 1th pool
-- $y_2$ = amount out of 2th pool
+- $y_1$ = amount out of 1st pool
+- $y_2$ = amount out of 2nd pool
 - $n$ = 1000 where Uniswap V2
 - $s$ = 3 where Uniswap V2
-- $R_{1, in}$ = reserve in of 1th pool
-- $R_{1, out}$ = reserve out of 1th pool
-- $R_{2, in}$ = reserve in of 2th pool
-- $R_{2, out}$ = reserve out of 2th pool
+- $R_{1, in}$ = reserve in of 1st pool
+- $R_{1, out}$ = reserve out of 1st pool
+- $R_{2, in}$ = reserve in of 2nd pool
+- $R_{2, out}$ = reserve out of 2nd pool
 
 Simplifying
 
